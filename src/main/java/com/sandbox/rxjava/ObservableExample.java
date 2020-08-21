@@ -1,5 +1,9 @@
 package com.sandbox.rxjava;
 
+import static com.sandbox.rxjava.util.Utils.sleepOneSecond;
+
+import java.util.Objects;
+
 import io.reactivex.rxjava3.core.Observable;
 import lombok.extern.log4j.Log4j2;
 
@@ -14,20 +18,24 @@ public class ObservableExample
         log.debug("Created");
 
         final Observable<String> obs2 = obs
-                .map(it -> {
-                    log.debug("Mapping");
-                    return it;
-                })
-                .filter(it -> {
-                    log.debug("Filtering");
-                    return true;
-                });
+                .map(it -> it)
+                .doOnNext(it -> log.debug("Mapping {}", it))
+                .filter(Objects::nonNull)
+                .doOnNext(it -> log.debug("Filtering {}", it));
+
         log.debug("Modified");
+
+        final Observable<String> just = Observable.just("1", "2");
 
         obs2.subscribe(
                 log::debug,
                 Throwable::printStackTrace,
                 () -> log.debug("Completed"));
+
+        sleepOneSecond();
+        sleepOneSecond();
+        sleepOneSecond();
+        sleepOneSecond();
 
         log.debug("Exiting");
     }
