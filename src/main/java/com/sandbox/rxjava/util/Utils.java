@@ -1,4 +1,4 @@
-package com.sandbox.rxjava;
+package com.sandbox.rxjava.util;
 
 import java.util.concurrent.TimeUnit;
 

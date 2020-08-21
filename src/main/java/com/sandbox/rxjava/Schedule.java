@@ -1,6 +1,6 @@
 package com.sandbox.rxjava;
 
-import static com.sandbox.rxjava.Utils.sleepOneSecond;
+import static com.sandbox.rxjava.util.Utils.sleepOneSecond;
 
 import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.core.Scheduler.Worker;
