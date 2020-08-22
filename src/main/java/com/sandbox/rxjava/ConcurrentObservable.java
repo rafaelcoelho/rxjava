@@ -3,13 +3,9 @@ package com.sandbox.rxjava;
 import static com.sandbox.rxjava.util.Utils.sleepOneSecond;
 
 import java.math.BigDecimal;
-import java.time.LocalTime;
-import java.time.chrono.ChronoZonedDateTime;
-import java.util.Date;
 
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Single;
-import io.reactivex.rxjava3.schedulers.Schedulers;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -19,7 +15,7 @@ public class ConcurrentObservable
     public static void main(String[] args)
     {
         final Single<BigDecimal> single = Observable.just("Apple", "Banana", "Milk", "Tomato", "Pineapple", "Bread")
-                .flatMap(it -> purchase(it, 1).subscribeOn(Schedulers.io()))
+                .map(it -> doPurchase(it, 1))
                 .reduce(BigDecimal::add)
                 .toSingle();
 
